@@ -12,9 +12,8 @@ This repo runs the following test cases:
 6. Verify that clicking the "Add to Cart" button adds the product to the cart.
 7. Verify that the cart icon updates with the correct number of items.
 8. Verify that adding multiple items of the same product increases the quantity in the cart.
-9. Verify that the cart page displays the correct products, quantities, and prices.
-10. Verify that the cart subtotal and total are calculated accurately.
-11. Verify that users can update the quantity of items in the cart.
-12. Verify that users can remove items from the cart.
+9. Verify that the cart subtotal and total are calculated accurately.
+10. Verify that users can update the quantity of items in the cart.
+11. Verify that users can remove items from the cart.
 
 on https://react-shopping-cart-67954.firebaseapp.com/

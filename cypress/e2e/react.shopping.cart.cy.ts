@@ -17,6 +17,7 @@ describe('test react shopping cart basic functionality', () => {
     pageObjects.findProductPrice().should('be.visible');
   });
   it('verify that filtering by size works correctly', () => {
+    // this test needs to verify the correct product is being displayed based on size
     pageObjects.findProduct().should('be.visible');
 
     cy.intercept('GET', 'products.json').as('getProducts');
@@ -187,8 +188,7 @@ describe('test react shopping cart basic functionality', () => {
     pageObjects.verifyCorrectAmountOfProductsAreVisible();
   });
   it('verify that clicking the "add to cart" button adds the product to the cart', () => {
-    let productTitle: string;
-    let productTitleInCart: string;
+    let productTitle: string, productTitleInCart: string;
 
     pageObjects.findProduct().should('be.visible');
 
@@ -210,5 +210,98 @@ describe('test react shopping cart basic functionality', () => {
         expect(productTitle).to.eq(productTitleInCart);
       });
   });
-  it('verify that the cart icon updates with the correct number of items.', () => {});
+  it('verify that the cart icon updates with the correct number of items', () => {
+    pageObjects.findProduct().should('be.visible');
+
+    pageObjects.findAddToCartButton().first().click();
+
+    pageObjects.findCartIconInCart().should('have.text', '1');
+  });
+  it('verify that adding multiple items of the same product increases the quantity in the cart.', () => {
+    pageObjects.findProduct().should('be.visible');
+
+    pageObjects.findAddToCartButton().first().click();
+
+    pageObjects.findAddToCartButton().first().click();
+
+    pageObjects
+      .findQuanityOfProductInCart()
+      .invoke('text')
+      .then((text) => {
+        expect(text).to.include('Quantity: 2');
+      });
+  });
+  it('verify that the cart subtotal is calculated accurately.', () => {
+    let price1: number, price2: number;
+
+    pageObjects.findProduct().should('be.visible');
+
+    pageObjects.findAddToCartButton().first().click();
+
+    pageObjects.findAddToCartButton().eq(1).click();
+
+    pageObjects
+      .findPriceOfProductInCart()
+      .first()
+      .invoke('text')
+      .then((text) => {
+        price1 = parseFloat(text.replace(/[$\s]/g, ''));
+      });
+
+    pageObjects
+      .findPriceOfProductInCart()
+      .eq(1)
+      .invoke('text')
+      .then((text) => {
+        price2 = parseFloat(text.replace(/[$\s]/g, ''));
+      });
+
+    pageObjects
+      .findSubtotalInCart()
+      .invoke('text')
+      .then((text) => {
+        const subtotal = parseFloat(text.replace(/[$\s]/g, ''));
+        expect(price1 + price2).to.eq(subtotal);
+      });
+  });
+  it('verify that users can update the quantity of items in the cart.', () => {
+    pageObjects.findProduct().should('be.visible');
+
+    pageObjects.findAddToCartButton().first().click();
+
+    pageObjects.findAddQuantityButton().click();
+
+    pageObjects
+      .findQuanityOfProductInCart()
+      .invoke('text')
+      .then((text) => {
+        expect(text).to.include('Quantity: 2');
+      });
+
+    pageObjects.findRemoveQuantityButton().click();
+
+    pageObjects
+      .findQuanityOfProductInCart()
+      .invoke('text')
+      .then((text) => {
+        expect(text).to.include('Quantity: 1');
+      });
+  });
+  it('verify that users can remove items from the cart.', () => {
+    pageObjects.findProduct().should('be.visible');
+
+    pageObjects.findAddToCartButton().first().click();
+
+    pageObjects.findAddToCartButton().eq(1).click();
+
+    pageObjects.findProductInCart().should('have.length', 2);
+
+    pageObjects.findRemoveProductFromCartButton().first().click();
+
+    pageObjects.findProductInCart().should('have.length', 1);
+
+    pageObjects.findRemoveProductFromCartButton().first().click();
+
+    pageObjects.findProductInCart().should('not.exist');
+  });
 });
