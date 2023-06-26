@@ -186,7 +186,7 @@ describe('test react shopping cart basic functionality', () => {
 
     pageObjects.verifyCorrectAmountOfProductsAreVisible();
   });
-  it.only('verify that clicking the "add to cart" button adds the product to the cart', () => {
+  it('verify that clicking the "add to cart" button adds the product to the cart', () => {
     let productTitle: string;
     let productTitleInCart: string;
 
@@ -210,4 +210,5 @@ describe('test react shopping cart basic functionality', () => {
         expect(productTitle).to.eq(productTitleInCart);
       });
   });
+  it('verify that the cart icon updates with the correct number of items.', () => {});
 });
