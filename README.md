@@ -17,3 +17,11 @@ This repo runs the following test cases:
 11. Verify that users can remove items from the cart.
 
 on https://react-shopping-cart-67954.firebaseapp.com/
+
+to run the tests headless:
+yarn cypress run
+
+to run the tests headed:
+yarn cypress open -> click E2E Testing -> click Start E2E Testing -> click react.shopping.cart.cy.ts
+
+cypress will create a video of the tests running and add it to the /cypress/videos folder
