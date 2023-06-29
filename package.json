@@ -9,7 +9,7 @@
     "@cypress/webpack-preprocessor": "^5.17.1",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "@typescript-eslint/parser": "^5.60.0",
-    "cypress": "12.13",
+    "cypress": "12.13.0",
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-cypress": "^2.13.3",
@@ -35,5 +35,8 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "dependencies": {
+    "cypress-plugin-api": "^2.11.1"
   }
 }
