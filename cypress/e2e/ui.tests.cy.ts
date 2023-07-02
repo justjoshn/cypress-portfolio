@@ -1,4 +1,4 @@
-import PageObjects from '../support/page-objects/pageObjects';
+import PageObjects from '../support/page-objects/pageObjectsUi';
 
 describe('test react shopping cart basic functionality', () => {
   const pageObjects = new PageObjects();

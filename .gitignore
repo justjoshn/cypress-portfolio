@@ -4,3 +4,7 @@
 # testing
 /cypress/videos
 /cypress/screenshots
+
+# DS Store
+/cypress/.DS_Store
+.DS_Store
