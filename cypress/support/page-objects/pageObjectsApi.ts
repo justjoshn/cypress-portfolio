@@ -5,11 +5,11 @@ class PageObjects {
   static readonly FIRST_POST_URL = `${PageObjects.BASE_URL}/posts/1`;
   static readonly INVALID_POST_URL = `${PageObjects.BASE_URL}/posts/999999`;
 
-  getAllPosts() {
+  requestGetAllPosts() {
     return cy.api('GET', PageObjects.ALL_POSTS_URL);
   }
 
-  getInvalidEndpoint() {
+  requestGetInvalidEndpoint() {
     return cy.api({
       method: 'GET',
       url: PageObjects.INVALID_URL,
@@ -17,11 +17,11 @@ class PageObjects {
     });
   }
 
-  getFirstPost() {
+  requestGetFirstPost() {
     return cy.api('GET', PageObjects.FIRST_POST_URL);
   }
 
-  getInvalidPost() {
+  requestGetInvalidPost() {
     return cy.api({
       method: 'GET',
       url: PageObjects.INVALID_POST_URL,
@@ -29,7 +29,7 @@ class PageObjects {
     });
   }
 
-  postPosts() {
+  requestPostPosts() {
     return cy.api({
       method: 'POST',
       url: PageObjects.ALL_POSTS_URL,
@@ -44,7 +44,7 @@ class PageObjects {
     });
   }
 
-  putPosts() {
+  requestPutPosts() {
     return cy.api({
       method: 'PUT',
       url: PageObjects.FIRST_POST_URL,
@@ -60,7 +60,7 @@ class PageObjects {
     });
   }
 
-  deleteFirstPost() {
+  requestDeleteFirstPost() {
     return cy.api('DELETE', PageObjects.FIRST_POST_URL);
   }
 }
