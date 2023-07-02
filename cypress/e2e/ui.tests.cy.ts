@@ -1,198 +1,198 @@
-import PageObjects from '../support/page-objects/pageObjectsUi';
+import PageObject from '../support/page-objects/pageObjectUi';
 
 describe('test react shopping cart basic functionality', () => {
-  const pageObjects = new PageObjects();
+  const pageObject = new PageObject();
 
   beforeEach(() => {
     cy.visit('/');
   });
 
   it('verify that all products are displayed with images, titles, and prices.', () => {
-    pageObjects.findProduct().should('be.visible');
+    pageObject.findProduct().should('be.visible');
 
-    pageObjects.findProductImage().should('be.visible');
+    pageObject.findProductImage().should('be.visible');
 
-    pageObjects.findProductTitle().should('be.visible');
+    pageObject.findProductTitle().should('be.visible');
 
-    pageObjects.findProductPrice().should('be.visible');
+    pageObject.findProductPrice().should('be.visible');
   });
   it('verify that filtering by size works correctly', () => {
     // this test needs to verify the correct product is being displayed based on size
-    pageObjects.findProduct().should('be.visible');
+    pageObject.findProduct().should('be.visible');
 
     cy.intercept('GET', 'products.json').as('getProducts');
 
-    pageObjects.findFilterButton('XS').click();
+    pageObject.findFilterButton('XS').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
 
-    pageObjects.findFilterButton('S').click();
-
-    cy.wait('@getProducts');
-
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObjects.findFilterButton('M').click();
+    pageObject.findFilterButton('S').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
 
-    pageObjects.findFilterButton('ML').click();
-
-    cy.wait('@getProducts');
-
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObjects.findFilterButton('L').click();
+    pageObject.findFilterButton('M').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
 
-    pageObjects.findFilterButton('XL').click();
-
-    cy.wait('@getProducts');
-
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObjects.findFilterButton('XXL').click();
+    pageObject.findFilterButton('ML').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
+
+    pageObject.findFilterButton('L').click();
+
+    cy.wait('@getProducts');
+
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
+
+    pageObject.findFilterButton('XL').click();
+
+    cy.wait('@getProducts');
+
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
+
+    pageObject.findFilterButton('XXL').click();
+
+    cy.wait('@getProducts');
+
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
   });
   it('verify that multiple filters can be applied simultaneously.', () => {
-    pageObjects.findProduct().should('be.visible');
+    pageObject.findProduct().should('be.visible');
 
     cy.intercept('GET', 'products.json').as('getProducts');
 
-    pageObjects.findFilterButton('XS').click();
+    pageObject.findFilterButton('XS').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
 
-    pageObjects.findFilterButton('M').click();
-
-    cy.wait('@getProducts');
-
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObjects.findFilterButton('L').click();
+    pageObject.findFilterButton('M').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
 
-    pageObjects.findFilterButton('XXL').click();
+    pageObject.findFilterButton('L').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
+
+    pageObject.findFilterButton('XXL').click();
+
+    cy.wait('@getProducts');
+
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
   });
   it('verify that filters can be cleared/reset', () => {
-    pageObjects.findProduct().should('be.visible');
+    pageObject.findProduct().should('be.visible');
 
     cy.intercept('GET', 'products.json').as('getProducts');
 
-    pageObjects.findFilterButton('XS').click();
+    pageObject.findFilterButton('XS').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
 
-    pageObjects.findFilterButton('XS').click();
-
-    cy.wait('@getProducts');
-
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObjects.findFilterButton('S').click();
+    pageObject.findFilterButton('XS').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
 
-    pageObjects.findFilterButton('S').click();
-
-    cy.wait('@getProducts');
-
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObjects.findFilterButton('M').click();
+    pageObject.findFilterButton('S').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
 
-    pageObjects.findFilterButton('M').click();
-
-    cy.wait('@getProducts');
-
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObjects.findFilterButton('ML').click();
+    pageObject.findFilterButton('S').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
 
-    pageObjects.findFilterButton('ML').click();
-
-    cy.wait('@getProducts');
-
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObjects.findFilterButton('L').click();
+    pageObject.findFilterButton('M').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
 
-    pageObjects.findFilterButton('L').click();
-
-    cy.wait('@getProducts');
-
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObjects.findFilterButton('XL').click();
+    pageObject.findFilterButton('M').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
 
-    pageObjects.findFilterButton('XL').click();
-
-    cy.wait('@getProducts');
-
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObjects.findFilterButton('XXL').click();
+    pageObject.findFilterButton('ML').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
 
-    pageObjects.findFilterButton('XXL').click();
+    pageObject.findFilterButton('ML').click();
 
     cy.wait('@getProducts');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
+
+    pageObject.findFilterButton('L').click();
+
+    cy.wait('@getProducts');
+
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
+
+    pageObject.findFilterButton('L').click();
+
+    cy.wait('@getProducts');
+
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
+
+    pageObject.findFilterButton('XL').click();
+
+    cy.wait('@getProducts');
+
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
+
+    pageObject.findFilterButton('XL').click();
+
+    cy.wait('@getProducts');
+
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
+
+    pageObject.findFilterButton('XXL').click();
+
+    cy.wait('@getProducts');
+
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
+
+    pageObject.findFilterButton('XXL').click();
+
+    cy.wait('@getProducts');
+
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
   });
   it('verify the correct number of products are visible', () => {
-    pageObjects.findProduct().should('be.visible');
+    pageObject.findProduct().should('be.visible');
 
-    pageObjects.verifyCorrectAmountOfProductsAreVisible();
+    pageObject.verifyCorrectAmountOfProductsAreVisible();
   });
   it('verify that clicking the "add to cart" button adds the product to the cart', () => {
     let productTitle: string, productTitleInCart: string;
 
-    pageObjects.findProduct().should('be.visible');
+    pageObject.findProduct().should('be.visible');
 
-    pageObjects
+    pageObject
       .findProductTitle()
       .first()
       .invoke('text')
@@ -200,9 +200,9 @@ describe('test react shopping cart basic functionality', () => {
         productTitle = text;
       });
 
-    pageObjects.findAddToCartButton().first().click();
+    pageObject.findAddToCartButton().first().click();
 
-    pageObjects
+    pageObject
       .findProductTitleInCart()
       .invoke('text')
       .then((text) => {
@@ -211,20 +211,20 @@ describe('test react shopping cart basic functionality', () => {
       });
   });
   it('verify that the cart icon updates with the correct number of items', () => {
-    pageObjects.findProduct().should('be.visible');
+    pageObject.findProduct().should('be.visible');
 
-    pageObjects.findAddToCartButton().first().click();
+    pageObject.findAddToCartButton().first().click();
 
-    pageObjects.findCartIconInCart().should('have.text', '1');
+    pageObject.findCartIconInCart().should('have.text', '1');
   });
   it('verify that adding multiple items of the same product increases the quantity in the cart.', () => {
-    pageObjects.findProduct().should('be.visible');
+    pageObject.findProduct().should('be.visible');
 
-    pageObjects.findAddToCartButton().first().click();
+    pageObject.findAddToCartButton().first().click();
 
-    pageObjects.findAddToCartButton().first().click();
+    pageObject.findAddToCartButton().first().click();
 
-    pageObjects
+    pageObject
       .findQuanityOfProductInCart()
       .invoke('text')
       .then((text) => {
@@ -234,13 +234,13 @@ describe('test react shopping cart basic functionality', () => {
   it('verify that the cart subtotal is calculated accurately.', () => {
     let price1: number, price2: number;
 
-    pageObjects.findProduct().should('be.visible');
+    pageObject.findProduct().should('be.visible');
 
-    pageObjects.findAddToCartButton().first().click();
+    pageObject.findAddToCartButton().first().click();
 
-    pageObjects.findAddToCartButton().eq(1).click();
+    pageObject.findAddToCartButton().eq(1).click();
 
-    pageObjects
+    pageObject
       .findPriceOfProductInCart()
       .first()
       .invoke('text')
@@ -248,7 +248,7 @@ describe('test react shopping cart basic functionality', () => {
         price1 = parseFloat(text.replace(/[$\s]/g, ''));
       });
 
-    pageObjects
+    pageObject
       .findPriceOfProductInCart()
       .eq(1)
       .invoke('text')
@@ -256,7 +256,7 @@ describe('test react shopping cart basic functionality', () => {
         price2 = parseFloat(text.replace(/[$\s]/g, ''));
       });
 
-    pageObjects
+    pageObject
       .findSubtotalInCart()
       .invoke('text')
       .then((text) => {
@@ -265,22 +265,22 @@ describe('test react shopping cart basic functionality', () => {
       });
   });
   it('verify that users can update the quantity of items in the cart.', () => {
-    pageObjects.findProduct().should('be.visible');
+    pageObject.findProduct().should('be.visible');
 
-    pageObjects.findAddToCartButton().first().click();
+    pageObject.findAddToCartButton().first().click();
 
-    pageObjects.findAddQuantityButton().click();
+    pageObject.findAddQuantityButton().click();
 
-    pageObjects
+    pageObject
       .findQuanityOfProductInCart()
       .invoke('text')
       .then((text) => {
         expect(text).to.include('Quantity: 2');
       });
 
-    pageObjects.findRemoveQuantityButton().click();
+    pageObject.findRemoveQuantityButton().click();
 
-    pageObjects
+    pageObject
       .findQuanityOfProductInCart()
       .invoke('text')
       .then((text) => {
@@ -288,20 +288,20 @@ describe('test react shopping cart basic functionality', () => {
       });
   });
   it('verify that users can remove items from the cart.', () => {
-    pageObjects.findProduct().should('be.visible');
+    pageObject.findProduct().should('be.visible');
 
-    pageObjects.findAddToCartButton().first().click();
+    pageObject.findAddToCartButton().first().click();
 
-    pageObjects.findAddToCartButton().eq(1).click();
+    pageObject.findAddToCartButton().eq(1).click();
 
-    pageObjects.findProductInCart().should('have.length', 2);
+    pageObject.findProductInCart().should('have.length', 2);
 
-    pageObjects.findRemoveProductFromCartButton().first().click();
+    pageObject.findRemoveProductFromCartButton().first().click();
 
-    pageObjects.findProductInCart().should('have.length', 1);
+    pageObject.findProductInCart().should('have.length', 1);
 
-    pageObjects.findRemoveProductFromCartButton().first().click();
+    pageObject.findRemoveProductFromCartButton().first().click();
 
-    pageObjects.findProductInCart().should('not.exist');
+    pageObject.findProductInCart().should('not.exist');
   });
 });
