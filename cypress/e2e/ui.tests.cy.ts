@@ -1,9 +1,21 @@
 import PageObject from '../support/page-objects/pageObjectUi';
 
+interface Product {
+  title: string;
+  availableSizes: string[];
+}
+
 describe('test react shopping cart basic functionality', () => {
   const pageObject = new PageObject();
+  let products: Product[];
 
   beforeEach(() => {
+    cy.request(
+      'https://react-shopping-cart-67954.firebaseio.com/products.json',
+    ).then((response: { body: { products: Product[] } }) => {
+      products = response.body.products;
+    });
+
     cy.visit('/');
   });
 
@@ -17,52 +29,29 @@ describe('test react shopping cart basic functionality', () => {
     pageObject.findProductPrice().should('be.visible');
   });
   it('verify that filtering by size works correctly', () => {
-    // this test needs to verify the correct product is being displayed based on size
+    const sizes: string[] = ['XS', 'S', 'M', 'ML', 'L', 'XL', 'XXL'];
+
     pageObject.findProduct().should('be.visible');
 
-    cy.intercept('GET', 'products.json').as('getProducts');
+    sizes.forEach((size: string) => {
+      const expectedProductTitles: string[] = products
+        .filter((product: Product) => product.availableSizes.includes(size))
+        .map((product: Product) => product.title);
 
-    pageObject.findFilterButton('XS').click();
+      cy.intercept('GET', 'products.json').as('getProducts');
 
-    cy.wait('@getProducts');
+      pageObject.findFilterButton(size).click();
 
-    pageObject.verifyCorrectAmountOfProductsAreVisible();
+      cy.wait('@getProducts');
 
-    pageObject.findFilterButton('S').click();
+      expectedProductTitles.forEach((title: string) => {
+        pageObject.findProductTitle().should('contain', title);
+      });
 
-    cy.wait('@getProducts');
+      pageObject.findFilterButton(size).click();
 
-    pageObject.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObject.findFilterButton('M').click();
-
-    cy.wait('@getProducts');
-
-    pageObject.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObject.findFilterButton('ML').click();
-
-    cy.wait('@getProducts');
-
-    pageObject.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObject.findFilterButton('L').click();
-
-    cy.wait('@getProducts');
-
-    pageObject.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObject.findFilterButton('XL').click();
-
-    cy.wait('@getProducts');
-
-    pageObject.verifyCorrectAmountOfProductsAreVisible();
-
-    pageObject.findFilterButton('XXL').click();
-
-    cy.wait('@getProducts');
-
-    pageObject.verifyCorrectAmountOfProductsAreVisible();
+      cy.wait('@getProducts');
+    });
   });
   it('verify that multiple filters can be applied simultaneously.', () => {
     pageObject.findProduct().should('be.visible');

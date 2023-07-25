@@ -29,9 +29,10 @@ class PageObject {
   }
 
   findFilterButton(availableSize: string) {
-    return cy.get('.sc-bj2vay-1 label').filter((index, label) => {
-      return label.textContent.trim() === availableSize;
-    });
+    return cy.contains(
+      '.sc-bj2vay-1 label',
+      new RegExp(`^${availableSize.trim()}$`),
+    );
   }
 
   findAddToCartButton() {
