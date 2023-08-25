@@ -6,7 +6,7 @@ export default defineConfig({
       // implement node event listeners here
     },
     baseUrl: 'https://react-shopping-cart-67954.firebaseapp.com/',
-    viewportWidth: 1366,
-    viewportHeight: 768,
+    viewportWidth: 1920,
+    viewportHeight: 1080,
   },
 });
