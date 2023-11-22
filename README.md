@@ -1,3 +1,6 @@
+# THIS PORTFOLIO IS OUT OF DATE GO TO https://github.com/justjoshn/automation-portoflio
+
+
 # Cypress-Portfolio: UI & API Testing Framework
 
 Welcome to my cypress portfolio project, an Automation Framework leveraging Cypress and TypeScript. This repository showcases automated test cases for both UI and API components, targeting a [React Shopping Cart demo application](https://react-shopping-cart-67954.firebaseapp.com/) and the [JSONPlaceholder API](https://jsonplaceholder.typicode.com).
