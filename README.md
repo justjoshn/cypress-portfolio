@@ -1,4 +1,4 @@
-# THIS PORTFOLIO IS OUT OF DATE GO TO https://github.com/justjoshn/automation-portoflio
+# THIS PORTFOLIO IS OUT OF DATE GO TO https://github.com/justjoshn/automation-portfolio
 
 
 # Cypress-Portfolio: UI & API Testing Framework
